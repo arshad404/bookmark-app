@@ -1,20 +1,20 @@
 const express = require("express");
 const cors = require("cors");
-const { NODE_PORT, NODE_URI } = require("./config");
-const { getDBConnection } = require("./config/dbConnection");
-getDBConnection();
-const errorMiddleware = require("./middlewares/errorHandlers/errorMiddleware");
+const morgan = require("morgan");
+
+require("dotenv").config();
 
 const app = express();
-require("./config/dbConnection");
 app.use(cors());
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+app.use(express.json());
 
 app.get("/", (req, res, next) => {
   res.status(200).send("Hello world");
 });
 
-app.use(errorMiddleware);
-
-app.listen(NODE_PORT, () => {
-  console.log(`Listening at ${NODE_URI}`);
-});
+module.exports = app;

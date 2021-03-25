@@ -1,5 +1,7 @@
+// const dotenv = require("dotenv");
+// dotenv.config({ path: ".. /config.env" });
+
 require("dotenv").config();
-const commonErrors = require("./commonErrors");
 
 const PRODUCTION_ENV = process.env.NODE_ENV === "production";
 
@@ -21,5 +23,5 @@ module.exports = {
   NODE_URI,
   MONGO_URI,
   JWT_PRIVATE_KEY,
-  commonErrors,
+  // commonErrors,
 };
